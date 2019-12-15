@@ -17,10 +17,12 @@
         this.cloud_num_left = 0;
         this.boom_num_left = 0;
         this.pig_num_left = 0;
+        this.sub_num_left = 0;
         this.five_num = 30;//最大数量
         this.cloud_num = 20;
         this.boom_num = 10;
         this.pig_num = 2;
+        this.sub_num = 20;
         this.moneyList = [];//掉落集合
         this.cai = new Image();//ai
         this.cai.src = "https://enuo.weibeicc.com/12game/caishen2.png";
@@ -32,6 +34,7 @@
         }
         this.score = 0;    //总分
         this.gift_num = 0;  //接住的礼物
+        this.booms_num = 0;  //接住的炸弹
         this.time = 30;//游戏时间
         this.times = 30;    //进度条时间
         this.clock;         //倒计时
@@ -135,7 +138,7 @@
     }
 
     Game.prototype.addMoney = function (x) {//掉钱
-        var random = Math.floor(Math.random() * 62);
+        var random = Math.floor(Math.random() * 82);
         if (0<=random && random< 30  && game.five_num_left >= 0 && game.five_num > 0 && !game.isEnd) {
             this.moneyList.push(new money(x, "five"));
             game.five_num--;
@@ -148,6 +151,9 @@
         } else if (random >=40 && random<= 60 && game.cloud_num_left >= 0 && game.cloud_num > 0 && !game.isEnd) {
             this.moneyList.push(new money(x, "cloud"));
             game.cloud_num--;
+        } else if (random >62 && random<= 82 && game.sub_num_left >= 0 && game.sub_num > 0 && !game.isEnd) {
+            this.moneyList.push(new money(x, "sub"));
+            game.sub_num--;
         }
     }
     Game.prototype.draw = function () {

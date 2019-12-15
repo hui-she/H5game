@@ -49,11 +49,12 @@ $(function () {
             success:function(data){
                 // console.log("sucess");
                 change(2);
+                console.log(game.sub_num)
+                $(".gift").html("太棒啦，你接住了" + game.gift_num + "个礼品,"+ game.booms_num +"个炸弹");
+                $(".integral").html("共计"+game.score+"积分~");
                 if(data.data.data.times > 3){
                     $(".tip-2").hide();
                 }
-                $(".gift").html("太棒啦，你接住了" + game.gift_num + "个礼品");
-                $(".integral").html("共计"+game.score+"积分~");
             },
             error:function(data){
                 // console.log("error");

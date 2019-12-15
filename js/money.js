@@ -11,6 +11,9 @@
 	var boom = new Image();//炸弹 圣诞蜡烛100分
     boom.src = "https://enuo.weibeicc.com/12game/f0.png";
 
+    var sub = new Image();//炸弹-200分
+    sub.src = "https://enuo.weibeicc.com/12game/f5.png";
+
     var moneyEnum = {
         five: {
             image: five,
@@ -37,6 +40,12 @@
             value: 100,
             widths:80,
 			heights:120,
+        }, sub: {
+            image: sub,
+            speed: 8,
+            value: -200,
+            widths:83,
+			heights:71,
         }
     };
 
@@ -69,7 +78,14 @@
         if (this.status == 0 && caiY <= bottom && ((game.rect.x <= left && left <= (+game.rect.x + game.rect.w)) || (game.rect.x <= right && (+game.rect.x + game.rect.w) >= right))) {//
             this.status = 1;
             game.score += moneyEnum[this.type].value;//记录总分数
-            game.gift_num ++;       //礼物总数
+            if(game.score<0){
+                game.score = 0;
+            }
+            if(this.type == "sub"){
+                game.booms_num ++;       //炸弹总数
+            }else{
+                game.gift_num ++;       //礼物总数
+            }
         } else if (this.y >= game.phone.h) {
             this.status = 2;
         }
